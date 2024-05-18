@@ -15,5 +15,6 @@ pkgs.mkShell {
     emacsPackages.smartparens
     emacsPackages.paredit
     emacsPackages.multiple-cursors
+    emacsPackages.evil
   ];
 }
