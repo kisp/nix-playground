@@ -1,12 +1,19 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    pkgs.ripgrep
-    pkgs.emacs-nox
-    pkgs.emacsPackages.magit
-    pkgs.emacsPackages.whitespace-cleanup-mode
-    pkgs.emacsPackages.nix-mode
-    pkgs.emacsPackages.modus-themes
+    ripgrep
+    tree
+    nixfmt-rfc-style
+    emacs-nox
+    emacsPackages.magit
+    emacsPackages.whitespace-cleanup-mode
+    emacsPackages.nix-mode
+    emacsPackages.modus-themes
+    emacsPackages.smartparens
+    emacsPackages.paredit
+    emacsPackages.multiple-cursors
   ];
 }
