@@ -16,5 +16,6 @@ pkgs.mkShell {
     emacsPackages.paredit
     emacsPackages.multiple-cursors
     emacsPackages.evil
+    emacsPackages.dockerfile-mode
   ];
 }
