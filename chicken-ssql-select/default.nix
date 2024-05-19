@@ -19,10 +19,12 @@ builtins.derivation {
   SOURCE = ./select.scm;
   OUTPUT = "bin/chicken-ssql-select";
 
-  PATH = "${pkgs.gcc}/bin:${pkgs.coreutils}/bin";
+  PATH = "${pkgs.gcc}/bin:${pkgs.coreutils}/bin:${pkgs.findutils}/bin:${pkgs.patchelf}/bin";
   csc = "${pkgs.chicken}/bin/csc";
 
   buildInputs = with pkgs; [
+    findutils
+    patchelf
     chicken
     chickenPackages.chickenEggs.ssql
   ];

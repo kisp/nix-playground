@@ -42,11 +42,13 @@
     (assert (zerop (sb-ext:process-exit-code process)))))
 
 (let ((repository-paths
-       (mapcar #'lib-chicken-11
-	       (mappend #'propagated-build-inputs (build-inputs)))))
+       (remove-if-not #'probe-file
+		      (mapcar #'lib-chicken-11
+			      (mappend #'propagated-build-inputs (build-inputs))))))
   (uiop:run-program "mkdir -p $out/bin")
   (run-csc :input (sb-ext:posix-getenv "SOURCE")
 	   :output (format nil "~A/~A"
 			   (sb-ext:posix-getenv "out")
 			   (sb-ext:posix-getenv "OUTPUT"))
-	   :repository-paths repository-paths))
+	   :repository-paths repository-paths)
+  (uiop:run-program "find $out -type f -exec patchelf --shrink-rpath '{}' \\; -exec strip '{}' \\;"))
