@@ -4,9 +4,11 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    (import ./default.nix { inherit pkgs; }).app.buildInputs
     ripgrep
     tree
     nixfmt-rfc-style
+    nurl
     emacs-nox
     emacsPackages.magit
     emacsPackages.whitespace-cleanup-mode
@@ -17,6 +19,7 @@ pkgs.mkShell {
     emacsPackages.multiple-cursors
     emacsPackages.evil
     emacsPackages.dockerfile-mode
+    emacsPackages.slime
     emacsPackages.crux
   ];
   shellHook = ''
