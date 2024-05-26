@@ -3,13 +3,21 @@
 }:
 
 let
-  inherit (pkgs) callPackage;
+  inherit (pkgs) callPackage fetchFromGitHub;
   custom-lib = callPackage ./custom-lib.nix { };
+  document-templates-src = fetchFromGitHub {
+    owner = "kisp";
+    repo = "document-templates";
+    rev = "0.0.19";
+    hash = "sha256-rrBs7iT54OXZ0nUxL7iZtfXd0fdD5wyA4C8FjtGDarA=";
+  };
+  document-templates = (callPackage document-templates-src { }).lib;
   sbcl' = pkgs.sbcl.withPackages (
     ps: with ps; [
       alexandria
       cl-ppcre
       custom-lib
+      document-templates
     ]
   );
   app = pkgs.stdenv.mkDerivation {
