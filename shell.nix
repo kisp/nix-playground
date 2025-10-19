@@ -17,6 +17,7 @@ pkgs.mkShell {
     emacsPackages.multiple-cursors
     emacsPackages.evil
     emacsPackages.dockerfile-mode
+    emacsPackages.docker
     emacsPackages.crux
   ];
   shellHook = ''
